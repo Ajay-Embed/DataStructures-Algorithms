@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602162851 source:/home/ajay/Documents/ds-in-c/stack/main.c
+	<stdio.h>
+	<stdlib.h>
+

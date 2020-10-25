@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1603634515 source:/home/ajay/Documents/ds-in-c/Bit-Manipulations/main.c
+1603651229 source:/home/ajay/Documents/ds-in-c/Bit-Manipulations/main.c
 	<stdio.h>
-	<stdlib.h>
+	<stdint.h>
 

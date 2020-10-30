@@ -1,3 +1,9 @@
+/*
+  * @file    - 0x3_basic_menu_driven_circular_fifo.c
+  * @author  - Ajay
+  * @date    - 29/10/2020
+  * @brief   - Algorithm & Implementation of a menu driven circular ENQ DEQ operation on an array
+*/
 
 /*
 The idea here is the implementation of a circular FIFO queue.
@@ -77,7 +83,7 @@ int main(void)
         switch(choice)
         {
             case 1:
-                printf("You have chose to EN-Q, please enter the number you'd like to put in Q\n");
+                printf("You have chose to EN-Q, enter the number you'd like to put in the Q\n");
                 scanf("%u", &number);
                 En_Q(&qptr, number);
                 break;

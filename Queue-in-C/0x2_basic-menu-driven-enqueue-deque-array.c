@@ -1,4 +1,9 @@
-
+/*
+  * @file    - 0x2_basic_menu_driven_enque_deque_array.c
+  * @author  - Ajay
+  * @date    - 28/10/2020
+  * @brief   - Implementation for a menu driven ENQ DEQ operation on an array
+*/
 #include <stdio.h>
 #include <stdlib.h>
 

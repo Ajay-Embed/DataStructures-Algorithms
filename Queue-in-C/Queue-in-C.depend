@@ -1,5 +1,0 @@
-# depslib dependency file v1.0
-1603980088 source:/home/ajay/Documents/ds-in-c/Queue-in-C/main.c
-	<stdio.h>
-	<stdint.h>
-

@@ -1,0 +1,1 @@
+Basics of LinkedList to read before jumping to 0x1 program

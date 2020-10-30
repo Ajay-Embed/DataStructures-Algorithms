@@ -13,9 +13,10 @@ EXAMPLE THAT SHOWCASES THE CONCEPT OF A DOUBLE ENDED QUEUE.
 
 By a DEQ, I mean, you can use both the front and rear indexes to insert as well as delelte a element.
 
-Here is a pseudocode ffor the same idea.
-
 ---------------------------------------------------------------------------------------------------------
+
+Here is a pseudocode for the same idea.
+
 Initial conditions ---  FRONT == 0 & REAR == -1
 
 (procedure 1)
@@ -29,6 +30,7 @@ INSERT_AT_REAR(ELEMENT_TO_BE_INSTERTED)
     ITEAM[REAR] = ELEMENT   //insert the element
 END OF INSERT_AT_REAR(ELEMENT_TO_BE_INSTERTED)
 
+
 (procedure 2)
 DELETE_FROM_REAR()
     IF FRONT > REAR
@@ -41,6 +43,7 @@ DELETE_FROM_REAR()
     RETURN ELEMENT
 END OF DELETE_FROM_REAR()
 
+
 (procedure 3)
 INSERT_AT_FRONT(ELEMENT_TO_BE_INSERTED)
     IF FRONT IS AT INDEX ZERO
@@ -52,6 +55,7 @@ INSERT_AT_FRONT(ELEMENT_TO_BE_INSERTED)
     ITEM[FRONT] = ELEMENT_TO_BE_INSERTED
 END OF INSERT_AT_FRONT(ELEMENT_TO_BE_INSERTED)
 
+
 (procedure 4)
 DELETE_FROM_FRONT()
     IF FRONT > REAR
@@ -61,7 +65,6 @@ DELETE_FROM_FRONT()
 
     ELEMENT = ITEM[FRONT]
     FRONT = FRONT + 1;
-
 END OF DELETE_FROM_FRONT()
 
 */
@@ -104,26 +107,14 @@ int main(void)
 
         switch(choice)
         {
-            case 1:
-                printf("You have chose to EN-Q, enter the number you'd like to put in the Q\n");
-                scanf("%u", &number);
-
-                break;
-
-            case 2:
-
-                if(value == -1)
-                {
-                    printf("Q underflow");
-                }
+            /*
 
 
-                break;
+            The cases have been left to the user as an exercise, keep 0x3 or 0x2 program as a reference
+            while implementing the switch cases.
 
-            case 3:
-                quit = 1;
-                break;
 
+            */
             default:
                 printf("please choose a option from the menu\n");
                 break;

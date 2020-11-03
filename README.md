@@ -1,4 +1,4 @@
-# DS-and-Algo-in-C
+# DS-and-Algo
 A collection of data structures &amp; algorithms
 
 We are planning to increase the languages supported by this project.

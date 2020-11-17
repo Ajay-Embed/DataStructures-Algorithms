@@ -36,7 +36,8 @@ typedef struct node
 } LinkedListNode_t ; 
 
 
-/* Creating a Linked List
+/* 
+ * Creating a Linked List
  *
  * Head Node: 
  * A general practice while creating linked lists is to
@@ -80,10 +81,103 @@ LinkedListNode_t* create_linkedlist(void)
     return head; 
 }
 
+
+/*
+ * Inserting new elements at the end of a Linked List 
+ *
+ * Say the following is a new element/node that one wished to insert:
+ *  ____________
+ * |            |
+ * |  Data = 15 |
+ * | Next Addr. |
+ * |____________|
+ *
+ * And the original list (before insertion) is as follows
+ *
+ *  ______________________            ___________________            __________________
+ * |Header                |          | Node 1            |          |Node 2            |
+ * |    Data variables    |          |  Data Variables   |          |   Data Variables |
+ * |______________________|          |___________________|          |__________________|
+ * | Address of 1st  Node |--------->| Address of Next   |--------->| Address of Next  |--------------
+ * |______________________|          |___________________|          |__________________|             |
+ *                                                                                                  NULL
+ *
+ * All we need to do is figure out which node hangs at the end of the list. 
+ * How can we do that? By traversing through the list and figuring out which 
+ * element/node's next pointer is NULL. 
+ *
+ * After figuring out the last node, all we need to do is hook up our new node
+ * to the last one's next. 
+ *
+ *  ______________________            ___________________            __________________               _______________
+ * |Header                |          | Node 1            |          |Node 2            |             | Node 3        |
+ * |    Data variables    |          |  Data Variables   |          |   Data Variables |             |  Data = 15    |
+ * |______________________|          |___________________|          |__________________|             |_______________|
+ * | Address of 1st  Node |--------->| Address of Next   |--------->| Address of Next  |------------>|Address of Next|--------
+ * |______________________|          |___________________|          |__________________|             |_______________|       |
+ *                                                                                                                          NULL
+ *                                                                                                                                                                                   
+ *                                                                                        
+ */
+
+void insert_element(LinkedListNode_t* head, int data)
+{
+    /* Allocate memory for the new member */ 
+    LinkedListNode_t* newNode = malloc(sizeof(LinkedListNode_t)); 
+
+    /* Store the address of Head to avoid messing the original pointer */
+    LinkedListNode_t *node = head; 
+
+    /* Traverse till the last node */  
+    while(node->next != NULL)
+    {
+        node = node->next; 
+    }
+
+    /* Link the New Node */
+    node->next = newNode; 
+    
+    /* Fill in the data */ 
+    newNode->data = data; 
+
+    newNode->next = NULL;
+
+    /* Increment number of elements in the head */
+    head->data++ ; 
+}
+
+void display_list(LinkedListNode_t* head)
+{
+    LinkedListNode_t* node = head ; 
+    int i = 1 ; 
+
+    printf("Total Nodes = %d\r\n", head->data) ; 
+
+    node = node->next; 
+
+    while(node) 
+    {  
+
+        printf("Node-%d Data : %d\r\n", i++, node->data) ; 
+        node = node->next; 
+    }
+
+
+}
+
 int main(void)
 {
-  LinkedListNode_t* head = create_linkedlist(); 
+    LinkedListNode_t* head = create_linkedlist(); 
+    
+     
+    insert_element(head,10); 
 
+    insert_element(head,30);
 
-  return 0; 
+    insert_element(head,25);
+
+    display_list(head); 
+    
+
+    return 0; 
 }

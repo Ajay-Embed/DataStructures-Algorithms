@@ -1,54 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct
-{
-    int size;               //total size of the array
-    int length;             //No. of elements in the array
-    int *A;                 //Pointer to array
 
-}Array_t;
+//MACROS
+#define SIZE 10
 
-//Func prototypes
-void Display(Array_t *);
-void Arr_Init(Array_t *);
 
+//Prototypes
+int LargestElement(int A[], int size);
+void SumKey_HashTable(int A[], int key);
+
+//Finding a pair of elements in an array which adds up to a certain given key value
+//The array has no duplicate elements, even if it has, remove them and then perform operation
+
+
+//Application Entry
 int main(void)
 {
-    Array_t arr;
+    int A[SIZE] = {7,3,4,6,5,2,6,100,1,8};
+    SumKey_HashTable(A, SIZE);
 
-    printf("Enter the size of the array\n");
-    scanf("%d", &arr.size);
-
-    //create a array of that size
-    arr.A = (int *)malloc(sizeof(int)*arr.size);
-
-    Arr_Init(&arr);
-    Arr_Display(&arr);
-
-    return 0;
+return 0;
 }
 
-void Arr_Display(Array_t *arr)
-{
-    printf("The entered array is - \n");
 
-    for(int i=0 ; i<arr->length ; i++)
+//Marking the Hash array
+void SumKey_HashTable(int A[], int key)
+{
+    int Max = LargestElement(A, SIZE);
+
+    //To do in O(N) --- > Create a hash array
+    int *H = (int *)malloc(sizeof(int)*Max);
+
+    for(int i = 0 ; i<SIZE ; i++)
     {
-        printf("%d. %d\n",i+1, arr->A[i]);
+        if(H[key-A[i]] != 0)
+        {
+            printf("%d + %d = %d\n", A[i], key-A[i], key);
+        }
+        H[A[i]]++;                  //Increment the hash array index value from 0 --> 1
     }
 }
 
-void Arr_Init(Array_t *arr)
+//TO find the largest elemnt in the array to create the Hash array accordingly
+int LargestElement(int A[], int size)
 {
-    printf("Enter the number of elements to be filled in the array\n");
-    scanf("%d", &arr->length);
+    int i=0;
+    int max = 0;
 
-    printf("Fill the elements in the array\n");
-
-    for(int i=0 ; i < arr->length ; i++)
+    for(i=0 ; i<size ; ++i)
     {
-        scanf("%d", &arr->A[i]);
+        if(max < A[i])
+        {
+            max = A[i];
+        }
     }
-
+    return max;
 }
+

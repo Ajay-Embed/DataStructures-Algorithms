@@ -71,6 +71,7 @@ void display_postorder(binary_tree_t* tree);
 /*********************************************
  *           One of My Mains
  ********************************************/
+
 int main(void)
 {
     printf(ESC bGREEN"\r\n----------------Generate a Binary Tree--------------------\r\n"ESC_RESET);
@@ -89,7 +90,7 @@ int main(void)
     else
     {
         printf(ESC bGREEN"\r\nWe planted your tree!! How do you wish to see it??"ESC_RESET);
-        printf("\r\nType in your choice\r\n1. Pre-Order\r\n2. In-Order\r\n3. Post-Order\r\n"); 
+        printf("\r\nType in your choice:\r\n1. Pre-Order\r\n2. In-Order\r\n3. Post-Order\r\n4. Print All\r\n"); 
         
         scanf("%d",&choice); 
         switch(choice)
@@ -101,11 +102,24 @@ int main(void)
                      break;
 
             case 3 : display_postorder(tree); 
-                     break; 
+                     break;
+
+            case 4 : printf("\r\nPre-Order: ");
+                     display_preorder(tree); 
+                     
+                     printf("\r\nIn-Order: ");
+                     display_inorder(tree); 
+                     
+                     printf("\r\nPost-Order: ");
+                     display_postorder(tree);
+                   
+                     break;
 
             default : printf("Invalid Selection!\r\n");  
-        }  
-    }
+                      break;
+        } 
+
+     }
 }
 
 /* 
@@ -154,8 +168,19 @@ void display_preorder(binary_tree_t* tree)
     if(tree)
     {
         printf("%d ", tree->data); 
-        display_preorder(tree->left); 
-        display_preorder(tree->right); 
+        
+        /* 
+         * Basic Heuristics- Avoid calls for NULL children
+         * If there are 'n' nodes in a tree, there are 'n+1'
+         * NULL children, by the following check, we save 
+         * n+1 useless recursive calls.
+         */
+ 
+        if(tree->left)
+            display_preorder(tree->left); 
+        
+        if(tree->right)
+            display_preorder(tree->right); 
     }
 }
 
@@ -168,9 +193,20 @@ void display_inorder(binary_tree_t* tree)
 {
     if(tree)
     {
-        display_inorder(tree->left); 
+        /* 
+         * Basic Heuristics- Avoid calls for NULL children
+         * If there are 'n' nodes in a tree, there are 'n+1'
+         * NULL children, by the following check, we save 
+         * n+1 useless recursive calls.
+         */
+
+        if(tree->left)
+            display_inorder(tree->left); 
+        
         printf("%d ", tree->data); 
-        display_inorder(tree->right); 
+        
+        if(tree->right)
+            display_inorder(tree->right); 
     }
 }
 
@@ -184,8 +220,19 @@ void display_postorder(binary_tree_t* tree)
 {
     if(tree)
     {
-        display_postorder(tree->left); 
-        display_postorder(tree->right);
+        /* 
+         * Basic Heuristics- Avoid calls for NULL children
+         * If there are 'n' nodes in a tree, there are 'n+1'
+         * NULL children, by the following check, we save 
+         * n+1 useless recursive calls.
+         */
+ 
+        if(tree->left)
+            display_postorder(tree->left); 
+
+        if(tree->right)
+            display_postorder(tree->right);
+        
         printf("%d ", tree->data); 
 
     }

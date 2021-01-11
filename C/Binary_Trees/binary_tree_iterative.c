@@ -87,7 +87,7 @@ int main(void)
     else
     {
         printf(ESC bGREEN"\r\nWe planted your tree!! How do you wish to see it??"ESC_RESET);
-        printf("\r\nType in your choice\r\n1. Pre-Order\r\n2. In-Order\r\n3. Post-Order\r\n"); 
+        printf("\r\nType in your choice:\r\n1. Pre-Order\r\n2. In-Order\r\n3. Post-Order\r\n4. Print All\r\n"); 
         
         scanf("%d",&choice); 
         switch(choice)
@@ -99,12 +99,39 @@ int main(void)
                      break;
 
             case 3 : display_postorder(tree); 
-                     break; 
+                     break;
+
+            case 4 : printf("\r\nPre-Order: ");
+                     display_preorder(tree); 
+                     
+                     printf("\r\nIn-Order: ");
+                     display_inorder(tree); 
+                     
+                     printf("\r\nPost-Order: ");
+                     display_postorder(tree);
+                   
+                     break;
 
             default : printf("Invalid Selection!\r\n");  
-        }  
+                      break;
+        } 
+
+
     }
 }
+
+/* 
+ * Generating a Binary Tree 
+ *
+ * This function generates the Binary Tree using iteration.
+ *
+ * A queue is maintained to keep track of all the nodes that are yet to be filled up/connected to their children. 
+ * We first fill in the value for a particular node, and then fill it's left child first. Once the left child of a node
+ * has been filled, we go and insert the right child for the node. Entering a negative value means the node wasn't created. 
+ * After calling malloc(), we check if the memory was allocated for the node, if failed we return NULL. We don't allocate 
+ * memory in case the value entered was negative. 
+ *
+ */ 
 
 binary_tree_t* plant_binary_tree(void)
 {
@@ -121,25 +148,36 @@ binary_tree_t* plant_binary_tree(void)
         printf("Enter the value of Root=");
         scanf("%d", &val); 
         node->data = val; 
+
+        /* Put the root node in the queue */ 
         queue[rear++] = node ; 
         
         while(rear != front)
         {
+            /* Remove the node being processed */
             node = queue[front++]; 
     
             /* Generate Left Sub-Tree */ 
             printf("Enter Left child of %d=", node->data); 
             scanf("%d", &val);
+
             if(val >= 0 ) 
             {   
                binary_tree_t* l_child = malloc(sizeof(binary_tree_t)); 
                
+               if(!l_child) 
+               {
+                   printf("Malloc Failed\r\n");
+                   return NULL; 
+               }
+
                l_child->data=val; 
 
-               /* Avoid SIGSEGV! NULLify the child nodes (not done by malloc) */
+               /* Avoid SIGSEGV! Set the child nodes as NULL (not done by malloc) */
                l_child->left = l_child->right=NULL;       
                node->left=l_child; 
 
+               /* Add the left child to the queue as it will be the root for it's subtree */ 
                queue[rear++] = l_child;  
             }
             
@@ -150,13 +188,20 @@ binary_tree_t* plant_binary_tree(void)
             {   
                binary_tree_t* r_child = malloc(sizeof(binary_tree_t)); 
                
+               if(!r_child) 
+               {
+                   printf("Malloc Failed\r\n");
+                   return NULL; 
+               }
+
                r_child->data=val; 
 
-               /* Avoid SIGSEGV! NULLify the child nodes (not done by malloc) */
+               /* Avoid SIGSEGV! Set the child nodes as NULL (not done by malloc) */
                r_child->left = r_child->right=NULL; 
 
                node->right = r_child;
 
+               /* Add the right child to the queue as it will be the root for it's subtree */ 
                queue[rear++] = r_child;  
             }
         }
@@ -168,49 +213,137 @@ binary_tree_t* plant_binary_tree(void)
 
 /* 
  * Print the Preorder Traversal of the Binary Tree 
- * This function uses recursion to print the preorder traversal of the binary tree. 
+ *
+ * This function uses iteration to print the preorder traversal of the binary tree. 
+ * A stack of node pointers is maintained to keep track of nodes that aren't explored completely. 
+ *
  */
 
-void display_preorder(binary_tree_t* tree)
+void display_preorder(binary_tree_t* node)
 {
-    if(tree)
-    {
-        printf("%d ", tree->data); 
-        display_preorder(tree->left); 
-        display_preorder(tree->right); 
+    binary_tree_t* stack[100]; 
+    int8_t top = -1; 
+
+    /* Repeat till stack is empty or the last NULL node is encountered */
+   
+    while((top != -1) || node)
+    {      
+        if(node)
+        {   
+            /* Print node data first */ 
+            printf(" %d", node->data);
+
+            /* Push it on the stack */ 
+            stack[++top]=node;
+
+            /* Explore it's left child */
+            node = node->left;
+        }
+        
+        
+        else
+        {
+            /* Pop the last node */ 
+            node = stack[top--]; 
+
+            /* Explore it's right child */ 
+            node = node->right; 
+        }
+         
     }
+    
 }
 
 /* 
  * Print the Inorder Traversal of the Binary Tree 
- * This function uses recursion to print the Inorder traversal of the binary tree.  
+ * 
+ * This function uses iteration to print the Inorder traversal of the binary tree.  
+ * A stack of node pointers is maintained to keep track of nodes that aren't explored completely.
+ *
  */
 
-void display_inorder(binary_tree_t* tree)
+void display_inorder(binary_tree_t* node)
 {
-    if(tree)
-    {
-        display_inorder(tree->left); 
-        printf("%d ", tree->data); 
-        display_inorder(tree->right); 
+    binary_tree_t* stack[100]; 
+    int8_t top = -1; 
+
+    /* Repeat till stack is empty or the last NULL node is encountered */
+    while((top != -1) || node)
+    {      
+        if(node)
+        {
+            /* Push the node on the stack */
+            stack[++top]=node;
+            /* Explore the left child first */
+            node = node->left;
+        }
+        
+        
+        else
+        {
+            /* Pop the last traversed node */
+            node = stack[top--]; 
+            /* Print the latest node */
+            printf(" %d", node->data);
+            /* Explore the right child */
+            node = node->right; 
+        }
+         
     }
+    
 }
 
 
 /* 
  * Print the Postorder Traversal of the Binary Tree 
- * This function uses recursion to print the Postorder traversal of the binary tree.  
+ * 
+ * This function uses iteration to print the Postorder traversal of the binary tree.  
+ * A stack of node pointers is maintained to keep track of nodes that aren't explored completely. 
+ *
  */
 
-void display_postorder(binary_tree_t* tree)
+void display_postorder(binary_tree_t* node)
 {
-    if(tree)
-    {
-        display_postorder(tree->left); 
-        display_postorder(tree->right);
-        printf("%d ", tree->data); 
+    binary_tree_t* stack[100];
+    binary_tree_t* last_visited = NULL; 
+    int8_t top = -1; 
 
+    while((top != -1) || node)
+    {      
+        if(node)
+        {
+            /* Push current node on the stack */ 
+            stack[++top]=node;
+            /* Explore left child */
+            node = node->left;
+        }
+        
+        
+        else
+        {
+            /* Peek into the stack */ 
+            node = stack[top]; 
+            
+            /* Check if we are visiting this node again */ 
+            if( (!node->right) || node==last_visited )
+            {
+                /* Pop the node */
+                node = stack[top--]; 
+                /* Print the node */ 
+                printf(" %d", node->data);
+                node = NULL ; 
+
+            }
+             
+            else 
+            {
+                /* If the node has a right child, visit it first */ 
+                last_visited = node; 
+                node = node->right; 
+            } 
+        }
+         
     }
+    
 }
-
 

@@ -167,38 +167,37 @@ void Insert_LL(Node *p, int position, int Element)
     }
     else
     {
-    //Now we will be inserting at a given index, first we will nedd to get to that index using a for() and then insert by breaking and mending some connections
+    //Now we will be inserting at a given index, first we will nedd to get to that index using a loop and then insert by breaking and mending some connections
     for(int i=0 ; i < ((position-1) && (position!=NULL)) ; i++)
     {
         p = p->next;
     }
-
+        //Now since p is at the desired location (given index)
         t->next = p->next;
         p->next = t;
     }
-
-
 }
 
 
 //Inserts a Node at the last of the LL
 void Insert_Last_LL(Node *p, int value)
 {
+    //concept of last pointer that points towards the end of linked list.
 
     Node *t;
     t = (Node *)malloc(sizeof(Node));
     t->data = value;
-    t->next = NULL;
+
     if(first == NULL)
     {
-        first = last = t;
-    }
-    else
+        first = t;
+        last = t;
+    }else
     {
-        last ->next = t;
+        last->next = t;
+        t->next = NULL;
         last = t;
     }
-
 }
 
 
@@ -206,8 +205,6 @@ void Insert_Last_LL(Node *p, int value)
 void Insert_Sorted_LL(Node *p, int value)
 {
     Node *q=NULL, *t;
-
-    p = first;
 
     t = (Node *)malloc(sizeof(Node));
     t->data = value;
@@ -219,21 +216,21 @@ void Insert_Sorted_LL(Node *p, int value)
         first = t;
     }else
     {
-    while(p && (value > p->data))
-    {
-        q = p;
-        p = p->next;
-    }
+        while(p && (value > p->data))
+        {
+            q = p;
+            p = p->next;
+        }
 
-    if(p == first)
-    {
-        t->next = first;
-        first = t;
-    }else
-    {
-        t->next = q->next;      //or t->next = p;
-        q->next = t;
-    }
+        if(p == first)
+        {
+            t->next = first;
+            first = t;
+        }else
+        {
+            t->next = q->next;      //or t->next = p;
+            q->next = t;
+        }
 
     }
 }
@@ -316,7 +313,7 @@ void Removing_AdjacentDuplicates_LL(Node *p)
 
 }
 
-//Removes immediate duplicates from a sorted or unsorted LL
+//Remove duplicates from a sorted or unsorted LL
 void Removing_Duplicates_LL(Node *p)
 {
     Node *q = first->next;
@@ -324,6 +321,7 @@ void Removing_Duplicates_LL(Node *p)
     while(q)
     {
         x = p->data;
+
         for(int i = 0 ; i< CountingNodes_LL(first) - i ; i++)
         {
 
@@ -385,11 +383,32 @@ void Concatenate_LL(Node *p, Node *q)
 {
     while(p)
     {
-    p = p->next;        // we reached the end of LL_1
+        p = p->next;        // we reached the end of LL_1
     }
 
     p = second;        //joining the first LL to second first element
+}
 
+
+void check_isLoop(Node *p)
+{
+    Node *q = first;
+
+    do
+    {
+        p = p->next;
+        q = q->next;
+
+        if(q != NULL)
+            q = q->next;
+        else
+            q = q;
+    }while(p && q && p!=q);
+
+    if(p == q)
+        return 1;
+    else
+        return 0;
 }
 
 int main(void)
@@ -443,6 +462,8 @@ int main(void)
       Insert_Last_LL(second, 60);
       Display_LL(first);
 
+
+
 //      printf("******Inserting in a sorted Linked List******\n");
 //      Insert_Sorted_LL(first, 55);
 //      Display_LL(first);
@@ -472,8 +493,17 @@ int main(void)
 //        ReverseLinks_LL(first);
 //        Display_LL(first);
 
-        printf("**************Concatenating 2 LL******************\n");
-        Concatenate_LL(first, second);
-        Display_LL(first);
+//        printf("**************Concatenating 2 LL******************\n");
+//        Concatenate_LL(first, second);
+//        Display_LL(first);
+
+        printf("**************IS LOOP LL******************\n");
+        //Creating LOOP in LL
+        Node *t1=NULL, *t2=NULL;
+        t1 = first->next->next;
+        t2 = first->next->next->next;
+        t2->next = t1;
+        isLoop_LL(first);
+
     return 0;
 }

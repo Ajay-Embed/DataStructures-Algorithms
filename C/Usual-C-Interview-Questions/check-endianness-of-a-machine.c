@@ -1,3 +1,4 @@
+
 #include <stdio.h> 
 #include <stdint.h> 
 
@@ -13,3 +14,5 @@ int main(void)
        printf("Big endian");
    return 0; 
 }
+
+

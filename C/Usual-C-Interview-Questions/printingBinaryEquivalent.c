@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdint.h>
 
-
+//Descriptive MACROS
+#define MSB_OF_THE_BYTE                          31
+#define NUMBER_OF_BITS_IN_STANDARD_INTEGER       sizeof(int)*8
 //Printing signed integer as it is
 void printBinaryEquivalent(int n)
 {
 uint32_t k=0;
-k = 1 << 31;                //MSB of the k is set
+
+k = 1 << MSB_OF_THE_BYTE;                //MSB of the k is set
 
     printf("Binary equivalent for unsigned integer");
-    for(int i=0; i<sizeof(int)*8; i++)
+    for(int i=0; i<NUMBER_OF_BITS_IN_STANDARD_INTEGER; i++)
     {
         if((n & k>>i) == k>>i)
         {
@@ -19,7 +22,8 @@ k = 1 << 31;                //MSB of the k is set
             printf("0");
         }
 
-        if((i+1)%8 == 0)
+        //To make the binary look good
+        if((i+1)%8 == 0)        
         printf(" ");
     }
 

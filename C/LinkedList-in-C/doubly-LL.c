@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 //******************Global Space****************************
-typedef struct
+typedef struct Node
 {
-    struct Doubly_Node_t *prev;
+    struct Node *prev;
     int data;
-    struct Doubly_Node_t *next;
+    struct Node *next;
 
 }Doubly_Node_t;
 

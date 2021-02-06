@@ -21,9 +21,9 @@ We will review it the first time and if needed, add some comments. It is hard to
 Once you are a part of the contributors, any code that is pushed by any member, will have to be reviewed by you or the assigned reviewers. 
 
 Currently we have the following members contributing -
-- Pranjal Shrivastava (Embedded Software Engineer)
-- Ajay Rajan (Embedded Software Engineer)
-- Shivam Ranjan (Frontend Developer)
+- Ajay Rajan (Embedded Software Engineer)                     ajaycrajan@gmail.com
+- Pranjal Shrivastava (Embedded Software Engineer)            pranshri0506@gmail.com
+- Shivam Ranjan (Frontend Developer)                          shivamranjan87@gmail.com
 
 
 

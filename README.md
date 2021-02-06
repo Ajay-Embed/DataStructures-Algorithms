@@ -27,6 +27,7 @@ Currently we have the following members contributing -
 
 
 
-- If interested drop us an e-mail @ -
- pranshri0506@gmail.com (Pranjal Shrivastava) OR ajaycrajan@gmail.com (Ajay Rajan), 
- we would love to discuss the synergies
+
+
+
+-- If interested drop any of us an e-mail & we would love to discuss on growing the project further !

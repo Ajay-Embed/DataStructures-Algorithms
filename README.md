@@ -20,6 +20,13 @@ If you are willing to contribute-
 We will review it the first time and if needed, add some comments. It is hard to follow rules but in order to become understandable & easy, they must be followed.
 Once you are a part of the contributors, any code that is pushed by any member, will have to be reviewed by you or the assigned reviewers. 
 
+Currently we have the following members contributing -
+- Pranjal Shrivastava (Embedded Software Engineer)
+- Ajay Rajan (Embedded Software Engineer)
+- Shivam Ranjan (Frontend Developer)
+
+
+
 - If interested drop us an e-mail @ -
  pranshri0506@gmail.com (Pranjal Shrivastava) OR ajaycrajan@gmail.com (Ajay Rajan), 
  we would love to discuss the synergies

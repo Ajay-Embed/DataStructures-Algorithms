@@ -333,10 +333,13 @@ void display_postorder(binary_tree_t* node)
                 temp = stack[top--]; 
                 /* Print the node */ 
                 printf(" %d", temp->data);
-
+                
+                /* Check if stack top has been explored */ 
                 while((top != -1) && (stack[top]->right == temp))
                 {
+                    /* Pop stack top if visited */ 
                     temp=stack[top--];
+                    /* Print the node */
                     printf(" %d", temp->data);
                 }
             }
@@ -362,23 +365,29 @@ void display_level_order(binary_tree_t* node)
     binary_tree_t* queue[100];
     int rear = 0, front = 0;
 
+    /* Insert root into queue */ 
     queue[rear++] = node;
     printf(" %d ", node->data);
 
     while(!(rear==front))
     {
+        /* Read from the queue */
         node = queue[front++];
-
+        
+        /* Explore left child */ 
         if(node->left)
         {
             printf("%d ", node->left->data);
+            /* Add next child to the destination queue */ 
             queue[rear++] = node->left;
-
         }
-
+        
+        /* Explore right child */ 
         if(node->right)
         {
             printf("%d ", node->right->data);
+
+            /* Add next child to the destination queue */ 
             queue[rear++] = node->right;
         }
 

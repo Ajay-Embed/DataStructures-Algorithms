@@ -68,6 +68,7 @@ binary_tree_t* plant_binary_tree(void);
 void display_preorder(binary_tree_t* tree);
 void display_inorder(binary_tree_t* tree);
 void display_postorder(binary_tree_t* tree);
+void display_level_order(binary_tree_t* tree);
 
 int main(void)
 {
@@ -87,7 +88,7 @@ int main(void)
     else
     {
         printf(ESC bGREEN"\r\nWe planted your tree!! How do you wish to see it??"ESC_RESET);
-        printf("\r\nType in your choice:\r\n1. Pre-Order\r\n2. In-Order\r\n3. Post-Order\r\n4. Print All\r\n"); 
+        printf("\r\nType in your choice:\r\n1. Pre-Order\r\n2. In-Order\r\n3. Post-Order\r\n4. Level Order\r\n5. Print all\r\n"); 
         
         scanf("%d",&choice); 
         switch(choice)
@@ -101,7 +102,10 @@ int main(void)
             case 3 : display_postorder(tree); 
                      break;
 
-            case 4 : printf("\r\nPre-Order: ");
+            case 4 : display_level_order(tree);
+                     break;
+
+            case 5 : printf("\r\nPre-Order: ");
                      display_preorder(tree); 
                      
                      printf("\r\nIn-Order: ");
@@ -109,7 +113,9 @@ int main(void)
                      
                      printf("\r\nPost-Order: ");
                      display_postorder(tree);
-                   
+                    
+                     printf("\r\nLevel-Order: ");
+                     display_level_order(tree);
                      break;
 
             default : printf("Invalid Selection!\r\n");  
@@ -304,12 +310,11 @@ void display_inorder(binary_tree_t* node)
 
 void display_postorder(binary_tree_t* node)
 {
-    binary_tree_t* stack[100];
-    binary_tree_t* last_visited = NULL; 
+    binary_tree_t* stack[100]; 
     int8_t top = -1; 
 
     while((top != -1) || node)
-    {      
+    {
         if(node)
         {
             /* Push current node on the stack */ 
@@ -317,33 +322,76 @@ void display_postorder(binary_tree_t* node)
             /* Explore left child */
             node = node->left;
         }
-        
-        
+       
         else
         {
-            /* Peek into the stack */ 
-            node = stack[top]; 
+            binary_tree_t* temp = stack[top]->right;
             
-            /* Check if we are visiting this node again */ 
-            if( (!node->right) || node==last_visited )
+            if(!temp)
             {
                 /* Pop the node */
-                node = stack[top--]; 
+                temp = stack[top--]; 
                 /* Print the node */ 
-                printf(" %d", node->data);
-                node = NULL ; 
-
+                printf(" %d", temp->data);
+                
+                /* Check if stack top has been explored */ 
+                while((top != -1) && (stack[top]->right == temp))
+                {
+                    /* Pop stack top if visited */ 
+                    temp=stack[top--];
+                    /* Print the node */
+                    printf(" %d", temp->data);
+                }
             }
-             
-            else 
+
+            else
             {
-                /* If the node has a right child, visit it first */ 
-                last_visited = node; 
-                node = node->right; 
-            } 
+                node=temp; 
+            }
         }
-         
-    }
-    
+    }   
 }
+
+/*
+ * Print the Level-order Traversal of the Binary Tree
+ *
+ * This function uses iteration to print the Level-order traversal of the binary tree.
+ * A queue of node pointers is maintained to keep track of nodes that aren't explored.
+ *
+ */
+
+void display_level_order(binary_tree_t* node)
+{
+    binary_tree_t* queue[100];
+    int rear = 0, front = 0;
+
+    /* Insert root into queue */ 
+    queue[rear++] = node;
+    printf(" %d ", node->data);
+
+    while(!(rear==front))
+    {
+        /* Read from the queue */
+        node = queue[front++];
+        
+        /* Explore left child */ 
+        if(node->left)
+        {
+            printf("%d ", node->left->data);
+            /* Add next child to the destination queue */ 
+            queue[rear++] = node->left;
+        }
+        
+        /* Explore right child */ 
+        if(node->right)
+        {
+            printf("%d ", node->right->data);
+
+            /* Add next child to the destination queue */ 
+            queue[rear++] = node->right;
+        }
+
+    }
+}
+
 

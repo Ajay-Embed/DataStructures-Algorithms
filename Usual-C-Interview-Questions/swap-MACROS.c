@@ -24,7 +24,7 @@
 //using GCC specific extension
 #define SWAP_3(x, y) do                                                                     \
                     {                                                                       \
-                        typeof(x) SWAP = x; x = y; y = SWAP;                                \
+                        typeof(x) SWAP_3 = x; x = y; y = SWAP_3;                            \
                     }while (0)
 
 //without GCC specific extension - can be invoked like this - SWAP_3(x,y, int) or SWAP_3(x,y, float)

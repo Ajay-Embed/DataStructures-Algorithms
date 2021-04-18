@@ -1,1 +1,0 @@
-basics of Queue to red before jumping to 0x1 program

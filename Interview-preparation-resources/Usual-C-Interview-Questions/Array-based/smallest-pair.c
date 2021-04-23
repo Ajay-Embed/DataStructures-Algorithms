@@ -76,8 +76,6 @@ void GetArray(Array_t *Arr)
     {
         printf("%d ", Arr->A[i]);
     }
-    
-    printf("\nChecking if the array is in icreasing order of elements ...\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n");
 }
 
 

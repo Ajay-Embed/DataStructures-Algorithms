@@ -1,4 +1,4 @@
-# DS-and-Algo
+# DataStructures-Algorithms
 A collection of data structures &amp; algorithms
 
 We are planning to increase the languages supported by this project.
@@ -30,4 +30,4 @@ Currently we have the following members contributing -
 
 
 
--- If interested drop any of us an e-mail & we would love to discuss on growing the project further !
+-- :sparkles::sparkles::sparkles:If interested drop any of us an e-mail & we would love to discuss on growing the project further !:sparkles::sparkles::sparkles:

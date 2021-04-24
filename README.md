@@ -1,4 +1,4 @@
-### :sparkles: Data-Structures | Algorithms | Interview preparation :sparkles:
+# :sparkles: Data-Structures | Algorithms | Interview preparation :sparkles:
 
 Hi there!,
 This is a repository that consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! :heart: 
@@ -11,7 +11,7 @@ If you can code, you can contribute 🙂
 ## Where to start if you wish to contribute? 
 - Look around in the DataStructures directory and check out the template that we follow, it's basically - **First pseudocode** and **Then actual Code**, so that anyone venturing here can understand what the heck is going on in the code, nothing here is intended to be cryptic , every single line of code has been commented well enough, and if you are able to find a bug, please don't hesitate to raise an Issue 🌸
 
-# If you have made up your mind that you certainly wish to contribute-
+### If you have made up your mind that you certainly wish to contribute-
 
 1. Find something in a language that suits you.
 2. Fork the project.

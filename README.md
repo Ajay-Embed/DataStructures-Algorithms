@@ -1,4 +1,4 @@
-## :sparkles: Your guide to Data-Structures & Algorithms :sparkles:
+### :sparkles: Data-Structures | Algorithms | Interview preparation :sparkles:
 A collection of data structures &amp; algorithms
 
 We are planning to increase the languages supported by this project.

@@ -1,5 +1,7 @@
 ### :sparkles: Data-Structures | Algorithms | Interview preparation :sparkles:
-A collection of data structures &amp; algorithms
+
+Hi there!,
+This is a repository that consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! :heart: 
 
 We are planning to increase the languages supported by this project.
 

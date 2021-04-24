@@ -36,7 +36,6 @@ public:
         bool *visit = new bool[v];
         for (int i = 0; i < v; i++)
         {
-
             visit[i] = false;
         }
         visit[y] = true;

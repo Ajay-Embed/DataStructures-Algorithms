@@ -1,6 +1,6 @@
-# :sparkles: Data-Structures | Algorithms | Interview preparation :sparkles:
+# Data-Structures | Algorithms | Interview preparation
 
-Hi there!,
+Hi,
 This is a repository that consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! :heart: 
 
 We are planning to increase the languages supported by this project.
@@ -36,6 +36,6 @@ Currently we have the following contributing members -
 
 
 
--- :sparkles::sparkles::sparkles: If interested drop any of us an e-mail & we would love to discuss on growing the project further:sparkles::sparkles::sparkles:
+-- :sparkles: If interested drop any of us an e-mail & we would love to discuss on growing the project further:sparkles:
 
 (*Please do not SPAM the e-mails* 🔪)

@@ -12,7 +12,7 @@ import java.util.Scanner;
  * (n is the array size)
  *
  * No. of passes = (n-1)
- * No. of comparisions = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
+ * No. of comparisons = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
  * No. of swaps = 1 + 2 + 3 +......n-1 = n(n-1)/2 [O(n^2)]
  *
  * Worst Case Time Complexity : O(n^2) [^ => Exponentiation]

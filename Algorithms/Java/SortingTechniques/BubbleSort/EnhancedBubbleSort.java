@@ -4,25 +4,25 @@ import java.util.Scanner;
 
 /************ Sorting Algorithm : Bubble Sort **********************
  *
+ * #GENERAL:
  * Bubble sort is a primitive sorting algorithm.
  * It is implemented by comparing two neighbours
  * and swapping if needed them pairwise on each pass.
  *
- * The performance of the algorithm in worst case:
- * (n is the array size)
- *
+ * #COMPARISONS:
  * No. of passes = (n-1)
- * No. of comparisions = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
+ * No. of comparisons = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
  * No. of swaps = 1 + 2 + 3 +......n-1 = n(n-1)/2 [O(n^2)]
  *
+ * #TIME/SPACE COMPLEXITIES
  * Worst Case Time Complexity : O(n^2) [^ => Exponentiation]
- * AuAuxiliary Space: O(1) [Since No Extra Space is Used]
+ * Auxiliary Space: O(1) [Since No Extra Space is Used]
  *
+ * #ENHANCEMENT:
+ * Best Case Time Complexity : O(n) [Due to the "little optimization" by stopping the algorithm if inner loop didn't cause any swap]
  *
- *
- * ----Best Case Time Complexity : O(n^2) [Due to the "little optimization" by stopping the algorithm if inner loop didn’t cause any swap] ----
  *******************************************************************/
-public class BubbleSortEnhanced {
+public class EnhancedBubbleSort {
 
     static void runBubbleSort(int[] array) {
         int arrayLength = array.length;

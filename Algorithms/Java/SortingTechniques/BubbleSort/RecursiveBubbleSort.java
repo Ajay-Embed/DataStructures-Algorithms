@@ -4,28 +4,30 @@ import java.util.Scanner;
 
 /************ Sorting Algorithm : Bubble Sort **********************
  *
+ * #GENERAL:
  * Bubble sort is a primitive sorting algorithm.
  * It is implemented by comparing two neighbours
  * and swapping if needed them pairwise on each pass.
  *
- * The performance of the algorithm in worst case:
- * (n is the array size)
- *
+ * #COMPARISONS:
  * No. of passes = (n-1)
- * No. of comparisions = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
+ * No. of comparisons = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
  * No. of swaps = 1 + 2 + 3 +......n-1 = n(n-1)/2 [O(n^2)]
  *
+ * #TIME/SPACE COMPLEXITIES:
  * Worst Case Time Complexity : O(n^2) [^ => Exponentiation]
  * Best Case Time Complexity : O(n^2)
- * AuAuxiliary Space: O(1) [Since No Extra Space is Used]
+ * Auxiliary Space: O(1) [Since No Extra Space is Used]
  *
+ * #RECURSION
  * Recursive Bubble Sort has no performance/implementation advantages, but can be a good question to check one’s understanding of Bubble Sort and recursion.
  *
- * #Recursion Idea:
+ * #RECURSION IDEA:
  *
  * 1. Base Case: If array size is 1, return.
- * 2. Do One Pass of normal Bubble Sort. This pass fixes last element of current subarray.
- * 3. Recur for all elements except last of current subarray.
+ * 2. Do One Pass of normal Bubble Sort. This pass fixes last element of current sub-array.
+ * 3. Recur for all elements except last of current sub-array.
+ *
  *******************************************************************/
 public class RecursiveBubbleSort {
 

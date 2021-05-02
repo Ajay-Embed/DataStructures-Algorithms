@@ -1,13 +1,18 @@
-package SortingTechniques.BubbleSort;
+package SortingTechniques.SelectionSort;
 
 import java.util.Scanner;
 
-/************ Sorting Algorithm : Bubble Sort **********************
+/************ Sorting Algorithm : Selection Sort **********************
  *
  * #GENERAL:
- * Bubble sort is a primitive sorting algorithm.
- * It is implemented by comparing two neighbours
- * and swapping if needed them pairwise on each pass.
+ * The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order)
+ * from unsorted part and putting it at the beginning.
+ * The algorithm maintains two sub-arrays in a given array:
+ *      1) The sub-array which is already sorted.
+ *      2) Remaining sub-array which is unsorted.
+ *
+ * In every iteration of selection sort, the minimum element (considering ascending order) from the unsorted sub-array is picked
+ * and moved to the sorted sub-array.
  *
  * #COMPARISONS:
  * No. of passes = (n-1)
@@ -19,21 +24,28 @@ import java.util.Scanner;
  * Best Case Time Complexity : O(n^2)
  * Auxiliary Space: O(1) [Since No Extra Space is Used]
  *
+ * #NOTE: The good thing about selection sort is it never makes more than O(n) swaps and can be useful when memory write is a costly operation.
+ *
  *******************************************************************/
-class BubbleSort {
+public class SelectionSort {
 
-    static void runBubbleSort(int[] array) {
+    static void runSelectionSort(int[] array) {
         int arrayLength = array.length;
-        /* Outer Loop runs through the Entire List of Elements */
-        for (int i = 0; i < arrayLength - 1; i++)
-            /* Inner Loop runs through index 0 to (arrayLength-1) as Largest Number from the SubArray will be shifted to Last index of the SubArray each time Inner Loop Exits */
-            for (int j = 0; j < arrayLength - i - 1; j++)
-                if (array[j] > array[j + 1]) {
-                    // swap temp and arr[i]
-                    int temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                }
+
+        // One by one move boundary of unsorted sub-array
+        for (int i = 0; i < arrayLength-1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int minIndex = i;
+            for (int j = i+1; j < arrayLength; j++)
+                if (array[j] < array[minIndex])
+                    minIndex = j;
+
+            // Swap the found minimum element with the first element
+            int temp = array[minIndex];
+            array[minIndex] = array[i];
+            array[i] = temp;
+        }
     }
 
     /* Prints the array */
@@ -59,7 +71,7 @@ class BubbleSort {
         System.out.println("Your input array :");
         printArray(array);
 
-        runBubbleSort(array);
+        runSelectionSort(array);
         System.out.println("Sorted array");
         printArray(array);
     }

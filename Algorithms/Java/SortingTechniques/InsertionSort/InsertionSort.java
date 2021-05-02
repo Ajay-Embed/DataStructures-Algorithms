@@ -4,30 +4,34 @@ import java.util.Scanner;
 
 /************ Sorting Algorithm : Insertion Sort **********************
  *
+ * #GENERAL:
  * The array is virtually split into a sorted and an unsorted part.
  * Values from the unsorted part are picked and placed at the correct position in the sorted part.
  * The performance of the algorithm in worst case:
  * (n is the array size)
  *
- * Algorithm:
+ * #ALGORITHM:
  * 1: Iterate from arr[1] to arr[n] over the array.
  * 2: Compare the current element (key) to its predecessor.
  * 3: If the key element is smaller than its predecessor, compare it to the elements before. Move the greater elements one position up to make space for the swapped element.
  *
- * Uses:
+ * #USES:
  * Insertion sort is used when number of elements is small.
  * It can also be useful when input array is almost sorted, only few elements are misplaced in complete big array.
  *
+ * #COMPARISONS:
  * No. of comparisons = 1 + 2 + 3+.....n-1= n(n-1)/2 [O(n^2)]
  * No. of swaps = 1 + 2 + 3 +......n-1 = n(n-1)/2 [O(n^2)]
  *
+ * #TIME/SPACE COMPLEXITIES:
  * Worst Case Time Complexity : O(n^2) [^ => Exponentiation]
  * Best Case Time Complexity : O(n^2)
- * AuAuxiliary Space: O(1) [Since No Extra Space is Used] (In Place)
+ * Auxiliary Space: O(1) [Since No Extra Space is Used] (In Place)
  *
- * Boundary Cases:
+ * #BOUNDARY CASES:
  * Insertion sort takes maximum time to sort if elements are sorted in REVERSE order to what is intended.
  * And it takes minimum time (Order of n) when elements are already sorted.
+ *
  *******************************************************************/
 public class InsertionSort {
 

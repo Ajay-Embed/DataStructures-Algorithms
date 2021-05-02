@@ -1,6 +1,5 @@
 package SortingTechniques.InsertionSort;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /************ Sorting Algorithm : Insertion Sort **********************
@@ -29,39 +28,47 @@ import java.util.Scanner;
  * Best Case Time Complexity : O(n^2)
  * Auxiliary Space: O(1) [Since No Extra Space is Used] (In Place)
  *
- * #BOUNDARY CASES:
+ * #RECURSION:
+ * Recursive Insertion Sort has no performance/implementation advantages, but can be a good question to check one’s understanding of Insertion Sort and recursion.
+ *
+ * #RECURSION IDEA:
+ * Base Case: If array size is 1 or smaller, return.
+ * Recursively sort first n-1 elements.
+ * Insert last element at its correct position in sorted array.
+ *
+ * #BOUNDARY CASE:
  * Insertion sort takes maximum time to sort if elements are sorted in REVERSE order to what is intended.
  * And it takes minimum time (Order of n) when elements are already sorted.
- *
  *******************************************************************/
-public class BinaryInsertionSort {
+public class RecursiveInsertionSort {
 
-    static void runBinaryInsertionSort(int[] array) {
-        for (int i = 1; i < array.length; i++) {
-            int key = array[i];
+    static void runRecursiveInsertionSort(int[] array, int arrayLength) {
 
-            /*
-             * Arrays.binarySearch() return Index of the search key, if it is contained in the array; otherwise, (-(insertion point) – 1).
-             * The insertion point is defined as the point at which the key would be inserted into the array.
-             * The index of the first element greater than the key, or array.length if all elements in the array are less than the specified Key.
-             */
-            int insertionPointOfKey = Arrays.binarySearch(array, 0, i, key);
-            int j = Math.abs(insertionPointOfKey + 1);
 
-            /*
-             * Uncomment these lines to print the values for better visualisation
-             */
-            // System.out.println("i: " + i + ", Key: " + key + ", Index: " + insertionPointOfKey);
-            // System.out.println("Value of j: " + j);
-
-            // Shifting array to one location right
-            System.arraycopy(array, j, array, j + 1, i - j);
-
-            // Placing element at its correct location
-            array[j] = key;
+        // Base Case
+        if (arrayLength <= 1) {
+            return;
         }
-    }
 
+        // Recursive Function Call by decrementing the size of the array by 1 each time.
+        runRecursiveInsertionSort(array, arrayLength - 1);
+
+        /*
+         * For Example: arrayLength: 3
+         * i.e. we only want to process first 3 elements, and find insertion point for array[2] between index 0 -> 1.
+         */
+        int lastElementOfSubArray = array[arrayLength - 1];
+        int j = arrayLength - 2;
+
+        // Iterate over the sorted sub-array to find insertion point by swapping the elements.
+        while (j >= 0 && array[j] > lastElementOfSubArray) {
+            array[j + 1] = array[j];
+            j--;
+        }
+
+        // Update the correct value at insertion point
+        array[j + 1] = lastElementOfSubArray;
+    }
 
     /* Prints the array */
     static void printArray(int[] array) {
@@ -86,7 +93,7 @@ public class BinaryInsertionSort {
         System.out.println("Your input array :");
         printArray(array);
 
-        runBinaryInsertionSort(array);
+        runRecursiveInsertionSort(array, array.length);
         System.out.println("Sorted array");
         printArray(array);
     }

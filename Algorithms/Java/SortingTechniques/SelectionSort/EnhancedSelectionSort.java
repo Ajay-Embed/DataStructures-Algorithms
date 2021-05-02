@@ -28,7 +28,8 @@ import java.util.Scanner;
  * The idea is to take also the maximum on every pass and place it at its correct position.
  * So in every pass, we keep track of both maximum and minimum and array becomes sorted from both ends.
  *
- * #NOTE: Please uncomment the lines in "/*" comments in order to better understand the code.
+ * #NOTE:
+ * Please uncomment the lines in "/*" comments in order to debug and print important outputs to console.
  *******************************************************************/
 public class EnhancedSelectionSort {
 
@@ -39,9 +40,6 @@ public class EnhancedSelectionSort {
         for (int i = 0, j = arrayLength - 1; i < j; i++, j--) {
             /*
             printArray(array);
-             */
-
-            /*
             System.out.println("i: " + i + ", j: " + j);
             System.out.println("array[i]: " + array[i] + ", array[j]: " + array[j]);
              */

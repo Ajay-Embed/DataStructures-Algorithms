@@ -23,7 +23,7 @@ import java.util.Scanner;
  *     It's 3. The formula is something like this N/2^x=1 or N=2^x,where N is 8(no of elements)
  *     so if we apply log on both sides then x=LogN.Now as we are doing 3 passes as
  *     we have got value of x as 3 which stands for number of passes,
- *     so at each pass n elements are involved so we will mutiply x by n,which gives
+ *     so at each pass n elements are involved so we will multiply x by n,which gives
  *     my time complexity as O(nLog n)
  *
  * #RECURSION IDEA:
@@ -36,6 +36,11 @@ import java.util.Scanner;
  *              Call mergeSort(arr, m+1, r)
  *      4. Merge the two halves sorted in step 2 and 3:
  *              Call merge(arr, l, m, r)
+ *
+ * #DRAWBACKS OF MERGE SORT:
+ * 1. Slower comparative to the other sort algorithms for smaller tasks.
+ * 2. Merge sort algorithm requires additional memory space of 0(n) for the temporary array .
+ * 3. It goes through the whole process even if the  array is sorted.
  *
  * #NOTE:
  * Please uncomment the lines in "/*" comment pattern in order to debug and print outputs to console.

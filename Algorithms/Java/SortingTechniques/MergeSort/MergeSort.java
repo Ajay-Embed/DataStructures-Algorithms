@@ -2,7 +2,7 @@ package SortingTechniques.MergeSort;
 
 import java.util.Scanner;
 
-/************ Sorting Algorithm : Selection Sort **********************
+/************ Sorting Algorithm : Merge Sort **********************
  *
  * #GENERAL:
  * Merge Sort is a Divide and Conquer algorithm.

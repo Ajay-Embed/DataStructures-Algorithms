@@ -29,7 +29,7 @@ import java.util.Scanner;
  * So in every pass, we keep track of both maximum and minimum and array becomes sorted from both ends.
  *
  * #NOTE:
- * Please uncomment the lines in "/*" comments in order to debug and print important outputs to console.
+ * Please uncomment the lines in "/*" pattern comments in order to debug and print  outputs to console.
  *******************************************************************/
 public class EnhancedSelectionSort {
 

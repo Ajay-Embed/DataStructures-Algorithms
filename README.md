@@ -1,15 +1,15 @@
 # Data-Structures | Algorithms | Interview preparation
 
 Hi,
-This is a repository that consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! :heart: 
+This is a repository that consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! 🔥 
 
 We are planning to increase the languages supported by this project.
 
 - Currently we have people working in C/C++ and Java. We need more people with skills in Rust, JS or even Assembly 😉  
-If you can code, you can contribute 🙂
+If you can code, you can contribute.
 
 ## Where to start if you wish to contribute? 
-- Look around in the DataStructures directory and check out the template that we follow, it's basically - **First pseudocode** and **Then actual Code**, so that anyone venturing here can understand what the heck is going on in the code, nothing here is intended to be cryptic , every single line of code has been commented well enough, and if you are able to find a bug, please don't hesitate to raise an Issue 🌸
+- Look around in the DataStructures directory and check out the template that we follow, it's basically - **First pseudocode** and **Then actual Code**, so that anyone venturing here can understand what the heck is going on in the code, nothing here is intended to be cryptic , every single line of code has been commented well enough, and if you are able to find a bug, please don't hesitate to raise an Issue.
 
 ### If you have made up your mind that you certainly wish to contribute-
 
@@ -37,6 +37,6 @@ Currently we have the following contributing members -
 
 
 
--- :sparkles: If interested drop any of us an e-mail & we would love to discuss on growing the project further:sparkles:
+-- If interested drop any of us an e-mail & we would love to discuss on growing the project further 📈
 
 (*Please do not SPAM the e-mails* 🔪)

@@ -1,0 +1,9 @@
+1. https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Function-Attributes.html
+
+2. https://gcc.gnu.org/onlinedocs/gcc/ARM-Function-Attributes.html#ARM-Function-Attributes
+
+3. https://gcc.gnu.org/onlinedocs/gcc/Variable-Attributes.html
+
+4. https://stackoverflow.com/questions/31637626/whats-the-usecase-of-gccs-used-attribute
+
+5. https://www.linuxtopia.org/online_books/programming_tool_guides/linux_using_gnu_compiler_collection/variable-attributes.html

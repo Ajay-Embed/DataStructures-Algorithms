@@ -7,7 +7,7 @@
  * that store the actual data and a self-referential variable 
  * that connects this node to the next node in the list. 
  *
- * That's how the list is formed and linked. It's jus some 
+ * That's how the list is formed and linked. It's just some
  * structures/class objects linked together. 
  * As shown in the figure :
  *

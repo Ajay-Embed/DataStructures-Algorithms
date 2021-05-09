@@ -45,6 +45,7 @@ import java.util.Scanner;
  * #NOTE:
  * Please uncomment the lines in "/*" comment pattern in order to debug and print outputs to console.
  *******************************************************************/
+
 public class MergeSort {
     static void merge(int[] array, int left, int middle, int right) {
         // Find sizes of two sub-arrays to be merged
@@ -145,7 +146,7 @@ public class MergeSort {
         */
     }
 
-    /* A utility function to print array of size n */
+    /* A utility function to print array of size n from specific start and end points */
     static void printArrayFromSpecificStartAndEndPosition(int[] array, int start, int end) {
         for (int i = start; i <= end; i++) {
             System.out.print(array[i] + " ");

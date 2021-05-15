@@ -1,6 +1,9 @@
 # C++ : OOP & other features
-This section aims to explain fundamentals of OOP using C++
-We might add some new C++ features like smart pointers to this section as well.
+This section aims to explain fundamentals of OOP using C++. <br>
+
+This section aims to explain all the principles of OOP practically in form of exemplary programs. 
+We might add some new C++ features like smart pointers to this section as well. <br>
+
 
 ## Principles of OOP in C++
 
@@ -40,5 +43,4 @@ We might add some new C++ features like smart pointers to this section as well.
    C++ allows the programmer to derive a class from a base class. Additionally it also has a feature
    called "Dynamic Binding", which allows functions to be overridden at runtime. (Virtual Functions).
 
-This section aims to explain all the above principles of OOP practically in form of exemplary programs. 
 

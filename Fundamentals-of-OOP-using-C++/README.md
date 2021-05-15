@@ -1,4 +1,5 @@
-# C++ : OOP & other features
+# Fundamentals of Object Oriented Programming using C++
+
 This section aims to explain fundamentals of OOP using C++. <br>
 
 This section aims to explain all the principles of OOP practically in form of exemplary programs. 

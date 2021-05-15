@@ -81,6 +81,9 @@ int main()
      * r1.length = 10; 
      * r1.breadth= 4;
      *
+     * ...And hit an error, 
+     * remember we used "Private" modifier for these members. 
+     *
      */ 
 
     /* Set the breadth */ 

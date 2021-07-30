@@ -1,7 +1,7 @@
 # Data-Structures | Algorithms | Interview preparation
 
-Hi,
-This is a repository that consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! 🔥 
+
+This is repository consists of Data structures, Algorithmic implementations & material for interview preparation, whichever it is that you wish to brush up, simply navigate to the relevant folder and find some exciting, well-documented and tested code for your reference! 🔥 
 
 We are planning to increase the languages supported by this project.
 

@@ -16,7 +16,7 @@ using namespace std;
 
 void printArray(int arr[], int n);
 
-void selectionSort(int arr[], int n)
+void insertionSort(int arr[], int n)
 {
     int value, hole;
     for (int i = 1; i < n; i++)
@@ -51,7 +51,7 @@ int main()
         cin >> arr[i];
     }
 
-    selectionSort(arr, n);
+    insertionSort(arr, n);
 
     return 0;
 }

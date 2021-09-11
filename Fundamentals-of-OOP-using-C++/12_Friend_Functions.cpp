@@ -25,6 +25,7 @@ class Drivers
         }
 
         friend void interface_function(); 
+        friend int main(); 
     protected:
         int b; 
     public:
@@ -56,9 +57,9 @@ int main(void)
 {
     Drivers F; 
 
-    // Illegal : 
-    // F.a = 12; 
-    // F.printa(); 
+     /* Legal since main is a friend function */ 
+     F.a = 988; 
+     F.printa(); 
 
     interface_function(); 
 

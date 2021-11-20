@@ -19,8 +19,7 @@ int power_of_two(int x, int exp)
 int main(void)
 {
     int x = 5; 
-
-
+    
     int res = power_of_two(x, 3);
     printf("%d", res);
 

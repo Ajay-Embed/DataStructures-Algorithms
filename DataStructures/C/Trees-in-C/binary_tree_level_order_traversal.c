@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <stdbool.h>
+
 #define MAX(a,b) (a > b ? a : b)
 #define ESC 	  "\033"
 #define ESC_RESET "\033[00m"
@@ -214,7 +215,7 @@ int main(void)
     else
     {
         /* Display the tree */ 
-        printf("\r\nPre-order traversal of the tree: ");
+        printf("\r\nLevel-order traversal of the tree: ");
         display_levelorder(tree, &Q);
     }
 

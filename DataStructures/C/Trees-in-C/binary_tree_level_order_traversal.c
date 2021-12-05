@@ -96,7 +96,7 @@ bool Qempty(queue_t* Q)
 
 /* 
  * Print the Level-order Traversal of the Binary Tree 
- * This function uses recursion to print the preorder traversal of the binary tree. 
+ * This function prints the level order of the binary tree. 
  */
 
 void display_levelorder(binary_tree_t* root, queue_t* Q)
@@ -161,32 +161,6 @@ binary_tree_t* plant_binary_tree(void)
     }
     
     return (node != NULL) ? node : NULL ; 
-}
-
-/* 
- * Print the Preorder Traversal of the Binary Tree 
- * This function uses recursion to print the preorder traversal of the binary tree. 
- */
-
-void display_preorder(binary_tree_t* tree)
-{
-    if(tree)
-    {
-        printf("%d ", tree->data); 
-        
-        /* 
-         * Basic Heuristics- Avoid calls for NULL children
-         * If there are 'n' nodes in a tree, there are 'n+1'
-         * NULL children, by the following check, we save 
-         * n+1 useless recursive calls.
-         */
- 
-        if(tree->left)
-            display_preorder(tree->left); 
-        
-        if(tree->right)
-            display_preorder(tree->right); 
-    }
 }
 
 /* Auxillary queue, will always have as many elements as the width of the tree.

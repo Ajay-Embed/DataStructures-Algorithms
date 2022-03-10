@@ -51,6 +51,28 @@ void SWAP(int *a, int *b)
     *b=temp;
 }
 
+int lomuto_partition(int *arr, int low, int high)
+{
+    int pivot = arr[high];
+
+    int i = low-1; 
+    int j = low; 
+
+    while(j<high)
+    {
+        if(arr[j] < pivot)
+        {
+            i++;
+            SWAP(&arr[i], &arr[j]);
+        }
+
+        j++;
+    }
+
+    SWAP(&arr[i+1], &arr[high]);
+    return (i+1);
+}
+
 int partition (int *arr, int low_index, int high_index)
 {
     int pivot = arr[low_index]; 
@@ -59,17 +81,9 @@ int partition (int *arr, int low_index, int high_index)
     
     do
     {
-        do
-        {
-            i++;
-
-        }while(arr[i]<=pivot);
+        do{i++;}while(arr[i]<=pivot);
         
-        do
-        {
-            j--;
-            
-        }while(arr[j]>pivot); 
+        do{j--;}while(arr[j]>pivot); 
 
         if(i<j)
         {
@@ -97,8 +111,8 @@ void sort_array(int *arr, int low_index, int high_index)
 
     if(low_index < high_index)
     {
-        pivot = partition(arr, low_index, high_index); 
-        sort_array(arr, low_index, pivot);
+        pivot = lomuto_partition(arr, low_index, high_index); 
+        sort_array(arr, low_index, pivot-1);
         sort_array(arr,pivot+1, high_index); 
     }
 }
@@ -144,7 +158,7 @@ int main(void)
         /* End of array delimiter */
         arr[n] = MAX; 
 
-        sort_array(arr,0,n);
+        sort_array(arr,0,n-1);
         
         printf("\r\nSorted array :"); 
         print_array(arr, n);

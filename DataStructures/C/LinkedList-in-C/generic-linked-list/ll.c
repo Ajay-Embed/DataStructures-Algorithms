@@ -12,10 +12,14 @@ void __ll_split(LinkedListNode_t* source, LinkedListNode_t** front, LinkedListNo
 LinkedListNode_t* __ll_merge(LinkedListNode_t* a, LinkedListNode_t* b, int (*cmp)(void*, void*));
 LinkedListNode_t* __ll_merge_sort(LinkedListNode_t* head, int (*cmp)(void*, void*));
 
+/*
+    Public Functions
+*/
+
 LinkedListNode_t* ll_new_node(void* data) {
     LinkedListNode_t* node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-    if (!node) return NULL;
+    if (!node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
     node->data = data;
     node->next = NULL;
@@ -23,8 +27,9 @@ LinkedListNode_t* ll_new_node(void* data) {
     return node;
 }
 
-void ll_free(LinkedListNode_t* head, void (*deallocator)(void*)) {
-    if (!head || !deallocator) return;
+bool ll_free(LinkedListNode_t* head, void (*deallocator)(void*)) {
+    if (!head || !deallocator) return false;  // return `NULL` if `head` pointer or the `deallocator` function is `NULL`
+                                              // or not provided.
 
     LinkedListNode_t* curr = head;
 
@@ -32,9 +37,11 @@ void ll_free(LinkedListNode_t* head, void (*deallocator)(void*)) {
         LinkedListNode_t* temp = curr;
         curr = curr->next;
 
-        deallocator(temp->data);
+        deallocator(temp->data);  // deallocating memory used by the individual elements.
         free(temp);
     }
+
+    return true;
 }
 
 void ll_print(LinkedListNode_t* head, void (*printer)(void*)) {
@@ -64,21 +71,23 @@ bool ll_is_empty(LinkedListNode_t* head) {
 bool ll_is_circular(LinkedListNode_t* head) {
     if (!head) return 0;
 
-    LinkedListNode_t* slow = head;
-    LinkedListNode_t* fast = head;
+    LinkedListNode_t* slow = head;  // moves one step per iteration
+    LinkedListNode_t* fast = head;  // moves two steps per iteration
 
-    while (fast && fast->next) {
+    while (fast && fast->next) {  // condition becomes `false` when the faster pointers traverses the whole list.
         slow = slow->next;
         fast = slow->next->next;
 
-        if (slow == fast) return true;
+        if (slow == fast) return true;  // if a loop exists both pointers in worst case will meet eachother after 2
+                                        // iterations of the first pointer.
     }
 
     return false;
 }
 
 LinkedListNode_t* ll_copy(LinkedListNode_t* head, void* (*copy_data)(void*)) {
-    if (!head || !copy_data) return NULL;
+    if (!head || !copy_data) return NULL;  // return `NULL` if `head` pointer or the `copy_data` function is `NULL` or
+                                           // not provided.
 
     LinkedListNode_t* curr = head;
     LinkedListNode_t* new_head = NULL;
@@ -87,7 +96,7 @@ LinkedListNode_t* ll_copy(LinkedListNode_t* head, void* (*copy_data)(void*)) {
     while (curr) {
         LinkedListNode_t* new_node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-        if (!new_node) return NULL;
+        if (!new_node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
         new_node->data = copy_data(curr->data);
         new_node->next = NULL;
@@ -106,7 +115,9 @@ LinkedListNode_t* ll_copy(LinkedListNode_t* head, void* (*copy_data)(void*)) {
 }
 
 LinkedListNode_t* ll_from_array(void* array, size_t element_size, size_t length, void* (*copy_data)(void*)) {
-    if (!array || length == 0 || !copy_data) return NULL;
+    if (!array || length == 0 || !copy_data) return NULL;  // return `NULL` if `array` pointer or the `copy_data`
+                                                           // function is `NULL` or not provided. Also, returns `NULL`
+                                                           // incase if provided array is of length zero.
 
     LinkedListNode_t* head = NULL;
     LinkedListNode_t* tail = NULL;
@@ -114,7 +125,7 @@ LinkedListNode_t* ll_from_array(void* array, size_t element_size, size_t length,
     for (size_t i = 0; i < length; i++) {
         LinkedListNode_t* new_node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-        if (!new_node) return NULL;
+        if (!new_node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
         new_node->data = copy_data(array + (i * element_size));
         new_node->next = NULL;
@@ -131,7 +142,9 @@ LinkedListNode_t* ll_from_array(void* array, size_t element_size, size_t length,
 }
 
 LinkedListNode_t* ll_from_pointer_array(void** array, size_t length, void* (*copy_data)(void*)) {
-    if (!array || length == 0 || !copy_data) return NULL;
+    if (!array || length == 0 || !copy_data) return NULL;  // return `NULL` if `array` pointer or the `copy_data`
+                                                           // function is `NULL` or not provided. Also, returns `NULL`
+                                                           // incase if provided array is of length zero.
 
     LinkedListNode_t* head = NULL;
     LinkedListNode_t* tail = NULL;
@@ -139,7 +152,7 @@ LinkedListNode_t* ll_from_pointer_array(void** array, size_t length, void* (*cop
     for (size_t i = 0; i < length; i++) {
         LinkedListNode_t* new_node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-        if (!new_node) return NULL;
+        if (!new_node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
         new_node->data = copy_data(array[i]);
         new_node->next = NULL;
@@ -156,21 +169,16 @@ LinkedListNode_t* ll_from_pointer_array(void** array, size_t length, void* (*cop
 }
 
 void** ll_to_array(LinkedListNode_t* head, size_t* out_length) {
-    if (!head || !out_length) return NULL;
+    if (!head || !out_length) return NULL;  // return `NULL` if `head` pointer or the `out_length` are not provided.
 
-    size_t length = 0;
-    LinkedListNode_t* curr = head;
-
-    while (curr) {
-        length++;
-        curr = curr->next;
-    }
+    size_t length = ll_length(head);
 
     void** array = (void**)malloc(length * sizeof(void*));
 
-    if (!array) return NULL;
+    if (!array) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
-    curr = head;
+    LinkedListNode_t* curr = head;
+
     for (size_t i = 0; i < length; i++) {
         array[i] = curr->data;
         curr = curr->next;
@@ -180,22 +188,24 @@ void** ll_to_array(LinkedListNode_t* head, size_t* out_length) {
     return array;
 }
 
-size_t ll_find(LinkedListNode_t* node, void* target, int (*cmp)(void*, void*)) {
-    size_t index = -1;
+LinkedListNode_t* ll_find(LinkedListNode_t* node, void* target, int (*cmp)(void*, void*), size_t* out_index) {
+    if (!cmp) return NULL;  // return `NULL` is a comparision function is not provided.
 
-    if (!cmp) return index;
+    if (out_index) *out_index = (size_t)-1;
+
+    size_t index = 0;
 
     while (node) {
-        index++;
-
-        if (cmp(node->data, target) == 0) {
-            break;
+        if (cmp(node->data, target) == 0) {  // checks whether the `curr.data` element is equal to `target` or not.
+            if (out_index) *out_index = index;
+            return node;
         }
 
         node = node->next;
+        index++;
     }
 
-    return index;
+    return NULL;
 }
 
 size_t ll_length(LinkedListNode_t* node) {
@@ -233,7 +243,7 @@ LinkedListNode_t* ll_get_tail(LinkedListNode_t* node) {
 LinkedListNode_t* ll_insert_head(LinkedListNode_t* head, void* data) {
     LinkedListNode_t* node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-    if (!node) return NULL;
+    if (!node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
     node->data = data;
     node->next = head;
@@ -246,7 +256,7 @@ LinkedListNode_t* ll_insert_tail(LinkedListNode_t* head, void* data) {
 
     LinkedListNode_t* node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-    if (!node) return NULL;
+    if (!node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
     node->data = data;
     node->next = NULL;
@@ -263,7 +273,7 @@ LinkedListNode_t* ll_insert_tail(LinkedListNode_t* head, void* data) {
 }
 
 LinkedListNode_t* ll_insert_index(LinkedListNode_t* head, void* data, size_t index) {
-    if (index == 0) return ll_insert_head(head, data);
+    if (index == 0) return ll_insert_head(head, data);  // directly append head
 
     LinkedListNode_t* curr = head;
     size_t curr_index = 0;
@@ -277,7 +287,7 @@ LinkedListNode_t* ll_insert_index(LinkedListNode_t* head, void* data, size_t ind
 
     LinkedListNode_t* node = (LinkedListNode_t*)malloc(sizeof(LinkedListNode_t));
 
-    if (!node) return NULL;
+    if (!node) return NULL;  // exit early and return `NULL` on memory allocation failure.
 
     node->data = data;
     node->next = curr->next;
@@ -287,7 +297,7 @@ LinkedListNode_t* ll_insert_index(LinkedListNode_t* head, void* data, size_t ind
 }
 
 LinkedListNode_t* ll_insert_ll_index(LinkedListNode_t* head, LinkedListNode_t* new_list, size_t index) {
-    if (!new_list) return head;
+    if (!new_list) return head;  // if `new_list` is empty directly return the `head`.
 
     if (index == 0) {
         LinkedListNode_t* last = new_list;
@@ -320,8 +330,8 @@ LinkedListNode_t* ll_insert_ll_index(LinkedListNode_t* head, LinkedListNode_t* n
 }
 
 LinkedListNode_t* ll_append(LinkedListNode_t* head, LinkedListNode_t* other) {
-    if (!head) return other;
-    if (!other) return head;
+    if (!head) return other;  // if `head` is empty directly return the `other`.
+    if (!other) return head;  // if `other` is empty directly return the `head`.
 
     LinkedListNode_t* curr = head;
 
@@ -335,12 +345,13 @@ LinkedListNode_t* ll_append(LinkedListNode_t* head, LinkedListNode_t* other) {
 }
 
 LinkedListNode_t* ll_remove(LinkedListNode_t* head, void* target, int (*cmp)(void*, void*), void (*deallocator)(void*)) {
-    if (!head || !cmp || !deallocator) return head;
+    if (!head || !cmp || !deallocator) return NULL;  // return `NULL` if `head` pointer, `cmp` function or the
+                                                     //`deallocator` function is not provided.
 
     LinkedListNode_t* prev = NULL;
     LinkedListNode_t* curr = head;
 
-    if (cmp(curr->data, target) == 0) {
+    if (cmp(curr->data, target) == 0) {  // checks whether the `curr.data` element is equal to `target` or not.
         head = curr->next;
 
         deallocator(curr->data);
@@ -349,7 +360,7 @@ LinkedListNode_t* ll_remove(LinkedListNode_t* head, void* target, int (*cmp)(voi
         return head;
     }
 
-    while (curr && cmp(curr->data, target) != 0) {
+    while (curr && cmp(curr->data, target) != 0) {  // continue the look if `curr.data` is not equal to `target`.
         prev = curr;
         curr = curr->next;
     }
@@ -365,7 +376,8 @@ LinkedListNode_t* ll_remove(LinkedListNode_t* head, void* target, int (*cmp)(voi
 }
 
 LinkedListNode_t* ll_remove_index(LinkedListNode_t* head, size_t index, void (*deallocator)(void*)) {
-    if (!head || !deallocator) return head;
+    if (!head || !deallocator) return head;  // return `NULL` if `head` pointer or the `deallocator` function is not
+                                             // provided.
 
     if (index == 0) {
         LinkedListNode_t* temp = head;
@@ -397,7 +409,14 @@ LinkedListNode_t* ll_remove_index(LinkedListNode_t* head, size_t index, void (*d
 }
 
 LinkedListNode_t* ll_remove_range(LinkedListNode_t* head, size_t start, size_t end, void (*deallocator)(void*)) {
-    if (!head || start > end || !deallocator) return head;
+    if (!head || !deallocator) return head;  // return `NULL` if `head` pointer or the `deallocator`
+                                             // function is not provided.
+
+    if (start > end) {  // swap in case `start` is greater than `end`.
+        size_t temp = start;
+        start = end;
+        end = temp;
+    }
 
     size_t curr_index = 0;
     LinkedListNode_t* prev = NULL;
@@ -432,14 +451,15 @@ LinkedListNode_t* ll_remove_range(LinkedListNode_t* head, size_t start, size_t e
     return head;
 }
 
-LinkedListNode_t* ll_delete(LinkedListNode_t* head, void* target, int (*cmp)(void*, void*), void (*deallocator)(void*)) {
-    if (!head || !cmp || !deallocator) return head;
+LinkedListNode_t* ll_remove_all(LinkedListNode_t* head, void* target, int (*cmp)(void*, void*), void (*deallocator)(void*)) {
+    if (!head || !cmp || !deallocator) return NULL;  // return `NULL` if `head` pointer, `cmp` function or the
+                                                     //`deallocator` function is not provided.
 
     LinkedListNode_t* prev = NULL;
     LinkedListNode_t* curr = head;
 
     while (curr) {
-        if (cmp(curr->data, target) == 0) {
+        if (cmp(curr->data, target) == 0) {  // checks whether the `curr.data` element is equal to `target` or not.
             if (prev) {
                 prev->next = curr->next;
             } else {
@@ -448,8 +468,6 @@ LinkedListNode_t* ll_delete(LinkedListNode_t* head, void* target, int (*cmp)(voi
 
             deallocator(curr->data);
             free(curr);
-
-            return head;
         }
         prev = curr;
         curr = curr->next;
@@ -459,6 +477,8 @@ LinkedListNode_t* ll_delete(LinkedListNode_t* head, void* target, int (*cmp)(voi
 }
 
 LinkedListNode_t* ll_sort(LinkedListNode_t* head, int (*cmp)(void*, void*)) {
+    if (!cmp) return NULL;  // return `NULL` incase if `cmp` is not provided.
+
     return __ll_merge_sort(head, cmp);
 }
 
@@ -479,7 +499,7 @@ LinkedListNode_t* ll_reverse(LinkedListNode_t* head) {
 }
 
 LinkedListNode_t* ll_map(LinkedListNode_t* head, void* (*fx)(void*)) {
-    if (!head || !fx) return NULL;
+    if (!head || !fx) return NULL;  // return `NULL` incase if `head` or `fx` are not provided or are `NULL`.
 
     LinkedListNode_t* new_head = ll_new_node(fx(head->data));
     LinkedListNode_t* new_tail = new_head;
@@ -495,14 +515,17 @@ LinkedListNode_t* ll_map(LinkedListNode_t* head, void* (*fx)(void*)) {
 }
 
 LinkedListNode_t* ll_filter(LinkedListNode_t* head, bool (*predicate)(void*), void* (*copy_element)(void*)) {
-    if (!head || !predicate) return NULL;
+    if (!head || !predicate) return NULL;  // return `NULL` incase if `head` or `predicate` are not provided or are
+                                           // `NULL`.
 
     LinkedListNode_t* new_head = NULL;
     LinkedListNode_t* new_tail = NULL;
 
     for (LinkedListNode_t* node = head; node; node = node->next) {
         if (predicate(node->data)) {
-            void* new_data = copy_element ? copy_element(node->data) : node->data;
+            void* new_data = copy_element ? copy_element(node->data) : node->data;  // if `copy_element` is `NULL` then
+                                                                                    // the elment pointer would be
+                                                                                    // directly copied.
             LinkedListNode_t* new_node = ll_new_node(new_data);
 
             if (!new_head) {
@@ -518,11 +541,11 @@ LinkedListNode_t* ll_filter(LinkedListNode_t* head, bool (*predicate)(void*), vo
     return new_head;
 }
 
-void* ll_collect(LinkedListNode_t* head, void* state, void (*fx)(void*, void*)) {
-    if (!head || !fx) return state;
+void* ll_reduce(LinkedListNode_t* head, void* state, void (*fx)(void*, void*)) {
+    if (!head || !fx) return state;  // return `state` incase if `head` or `fx` are not provided or are `NULL`.
 
     for (LinkedListNode_t* node = head; node; node = node->next) {
-        fx(state, node->data);
+        fx(state, node->data);  // applies the function onto both and saves the result back inside `state`.
     }
 
     return state;
@@ -558,7 +581,7 @@ LinkedListNode_t* __ll_merge(LinkedListNode_t* a, LinkedListNode_t* b, int (*cmp
 
     LinkedListNode_t* result = NULL;
 
-    if (cmp(a->data, b->data) <= 0) {
+    if (cmp(a->data, b->data) <= 0) {  // `-1`: lhs < rhs; `0`: lhs = rhs; `+1`: lhs > rhs;
         result = a;
         result->next = __ll_merge(a->next, b, cmp);
     } else {

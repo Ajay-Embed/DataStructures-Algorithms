@@ -47,6 +47,16 @@ bool ll_free(LinkedListNode_t* head, void (*deallocator)(void*));
 void ll_print(LinkedListNode_t* head, void (*printer)(void*));
 
 /**
+ * Splits the linked list into two halves. If the list has an odd number of nodes, the extra node goes into the front
+ * list.
+ *
+ * @param head A pointer to the start of the linked list.
+ * @param front A variable reference where the output first half will be stored.
+ * @param back A variable reference where the output second half will be stored.
+ */
+void ll_split(LinkedListNode_t* head, LinkedListNode_t** front, LinkedListNode_t** back);
+
+/**
  * Returns `true` if the list is empty.
  *
  * @param head A pointer to the start of the linked list.
@@ -236,7 +246,7 @@ LinkedListNode_t* ll_remove_all(LinkedListNode_t* head, void* target, int (*cmp)
  *
  * @param head A pointer to the start of the linked list.
  * @param cmp A function pointer which can compare the `target` and the elements.
- * @return A pointer to the start of the new linked list. Returns `NULL` if failure.
+ * @return A pointer to the start of the sorted linked list. Returns `NULL` if failure.
  */
 LinkedListNode_t* ll_sort(LinkedListNode_t* head, int (*cmp)(void*, void*));
 

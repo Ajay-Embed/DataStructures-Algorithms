@@ -8,7 +8,6 @@
     Inner functions, not to be used externally.
 */
 
-void __ll_split(LinkedListNode_t* source, LinkedListNode_t** front, LinkedListNode_t** back);
 LinkedListNode_t* __ll_merge(LinkedListNode_t* a, LinkedListNode_t* b, int (*cmp)(void*, void*));
 LinkedListNode_t* __ll_merge_sort(LinkedListNode_t* head, int (*cmp)(void*, void*));
 
@@ -62,6 +61,26 @@ void ll_print(LinkedListNode_t* head, void (*printer)(void*)) {
     }
 
     printf("]");
+}
+
+void ll_split(LinkedListNode_t* source, LinkedListNode_t** front, LinkedListNode_t** back) {
+    if (!source || !source->next) {
+        *front = source;
+        *back = NULL;
+        return;
+    }
+
+    LinkedListNode_t* slow = source;
+    LinkedListNode_t* fast = source->next;
+
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    *front = source;
+    *back = slow->next;
+    slow->next = NULL;
 }
 
 bool ll_is_empty(LinkedListNode_t* head) {
@@ -567,26 +586,6 @@ void* ll_reduce(LinkedListNode_t* head, void* state, void (*fx)(void*, void*)) {
     Inner functions implementations. Not to be used externally without precautions.
 */
 
-void __ll_split(LinkedListNode_t* source, LinkedListNode_t** front, LinkedListNode_t** back) {
-    if (!source || !source->next) {
-        *front = source;
-        *back = NULL;
-        return;
-    }
-
-    LinkedListNode_t* slow = source;
-    LinkedListNode_t* fast = source->next;
-
-    while (fast && fast->next) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-
-    *front = source;
-    *back = slow->next;
-    slow->next = NULL;
-}
-
 LinkedListNode_t* __ll_merge(LinkedListNode_t* a, LinkedListNode_t* b, int (*cmp)(void*, void*)) {
     if (!a) return b;
     if (!b) return a;
@@ -610,7 +609,7 @@ LinkedListNode_t* __ll_merge_sort(LinkedListNode_t* head, int (*cmp)(void*, void
     LinkedListNode_t* front = NULL;
     LinkedListNode_t* back = NULL;
 
-    __ll_split(head, &front, &back);
+    ll_split(head, &front, &back);
 
     front = __ll_merge_sort(front, cmp);
     back = __ll_merge_sort(back, cmp);

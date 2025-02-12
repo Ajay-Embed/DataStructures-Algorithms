@@ -514,19 +514,31 @@ LinkedListNode_t* ll_map(LinkedListNode_t* head, void* (*fx)(void*)) {
     return new_head;
 }
 
-LinkedListNode_t* ll_filter(LinkedListNode_t* head, bool (*predicate)(void*), void* (*copy_element)(void*)) {
-    if (!head || !predicate) return NULL;  // return `NULL` incase if `head` or `predicate` are not provided or are
-                                           // `NULL`.
+LinkedListNode_t* ll_filter(LinkedListNode_t* head, bool (*predicate)(void*), void* (*copy_element)(void*), void (*deallocator)(void*)) {
+    if (!head || !predicate || !copy_element || !deallocator) return NULL;  // return `NULL` in case if any one of
+                                                                            // the parameters are not provided.
 
     LinkedListNode_t* new_head = NULL;
     LinkedListNode_t* new_tail = NULL;
 
     for (LinkedListNode_t* node = head; node; node = node->next) {
         if (predicate(node->data)) {
-            void* new_data = copy_element ? copy_element(node->data) : node->data;  // if `copy_element` is `NULL` then
-                                                                                    // the elment pointer would be
-                                                                                    // directly copied.
+            void* new_data = copy_element(node->data);
+
+            if (!new_data) {
+                ll_free(new_head, deallocator);
+
+                return NULL;
+            }
+
             LinkedListNode_t* new_node = ll_new_node(new_data);
+
+            if (!new_node) {
+                deallocator(new_data);
+                ll_free(new_head, deallocator);
+
+                return NULL;
+            }
 
             if (!new_head) {
                 new_head = new_node;

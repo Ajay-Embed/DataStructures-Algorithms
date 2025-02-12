@@ -276,19 +276,27 @@ LinkedListNode_t* ll_map(LinkedListNode_t* head, void* (*fx)(void*));
 
 /**
  * Applies a predicate onto the list and returns a newly allocated one with only those elements which fulfill the given
- * predicate.
+ * predicate. A deallocator is provided in case if the filter fails middle of linked list.
  * ```C
  * void printer(void* data) { printf("%d", *(int*)data); }
  *
  * bool is_even(void* e) { return *(int*)e % 2 == 0; }
  *
- * void* copy_element(void* e) { return e; }
+ * void* copy_element(void* e) {
+ *     int* copy = (int*)malloc(sizeof(int));
+ *     if (!copy) return NULL;
+ *
+ *     *copy = *(int*)e;
+ *     return copy;
+ * }
+ *
+ * void deallocator(void* e) { free(e); }
  *
  * int arr[] = {4, 7, 1, 6, 2, 8, 9, 3, 0, 5};
  * int n = sizeof(arr) / sizeof(int);
  *
- * LinkedListNode_t* ll = ll_from_array((void*)arr, sizeof(int), n, copy_data);
- * ll_print(ll_filter(ll, is_even, copy_element), printer); // [4, 6, 2, 8, 0]
+ * LinkedListNode_t* ll = ll_from_array((void*)arr, sizeof(int), n, copy_element);
+ * ll_print(ll_filter(ll, is_even, copy_element, deallocator), printer); // [4, 6, 2, 8, 0]
  * ```
  *
  * @param head A pointer to the start of the linked list.
@@ -296,9 +304,10 @@ LinkedListNode_t* ll_map(LinkedListNode_t* head, void* (*fx)(void*));
  * not.
  * @param copy_element A function pinter to a function which will manage copying and allocation of the newly copied
  * elements.
+ * @param deallocator A function pointer which can deallocate the elements. Exits early if it is not provided.
  * @return A pointer to the start of the new linked list. Returns `NULL` if failure.
  */
-LinkedListNode_t* ll_filter(LinkedListNode_t* head, bool (*predicate)(void*), void* (*copy_element)(void*));
+LinkedListNode_t* ll_filter(LinkedListNode_t* head, bool (*predicate)(void*), void* (*copy_element)(void*), void (*deallocator)(void*));
 
 /**
  * Reduces the whole linked list into a single state element.

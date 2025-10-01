@@ -27,10 +27,11 @@ Once you are a part of the contributors, any code that is pushed by any member, 
 *(Just a general protocol we follow so that the repo doesn't have any buggy code).* 
 
 Currently we have the following contributing members -
-- Ajay Rajan          (Software Engineer - Embedded)                      ajaycrajan@gmail.com
-- Pranjal Shrivastava (Software Engineer - Embedded)                      pranshri0506@gmail.com
-- Shivam Ranjan       (Software Engineer - Frontend)                      shivamranjan87@gmail.com
-- Anmol Malhotra      (Software Engineer - Backend)                       anmolmalhotra97@gmail.com
+- Ajay Rajan                                ajaycrajan@gmail.com
+- Pranjal Shrivastava                       pranshri0506@gmail.com
+- Shivam Ranjan                             shivamranjan87@gmail.com
+- Anmol Malhotra                            anmolmalhotra97@gmail.com
+- Bilakshan Purohit                         pbilakshan@gmail.com
 
 
 
@@ -39,4 +40,4 @@ Currently we have the following contributing members -
 
 -- If interested drop any of us an e-mail & we would love to discuss on growing the project further 📈
 
-(*Please do not SPAM the e-mails* 🔪)
+(*do not SPAM the e-mails* 🔪)
